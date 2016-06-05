@@ -1,15 +1,30 @@
 {
-  "name":    "node-uptime2",
+  "name": "node-uptime2",
   "description": "Remote monitoring for HTTP and HTTPS applications",
   "version": "4.0.0",
-  "author": ["Francois Zaninotto","Ivan Kulikov"],
+  "author": [
+    "Francois Zaninotto",
+    "Ivan Kulikov"
+  ],
   "dependencies": {
+    "express": "^4.13.4",
+    "sequelize": "^3.23.3",
+    "sequelize-cli": "^2.4.0",
+    "socket.io": "^1.4.6"
   },
-  "devDependencies": {
-  },
-  "keywords": ["uptime2", "monitoring", "api", "check"],
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "keywords": [
+    "uptime2",
+    "monitoring",
+    "api",
+    "check"
+  ],
   "repository": "https://github.com/gunmetal313-nodejs/uptime2",
   "license": "MIT",
   "scripts": {
+    "dashboard": "node dashboard.js",
+    "backend": "node backend.js",
+    "node": "node node.js"
   }
 }
