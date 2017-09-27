@@ -1,15 +1,11 @@
 /**
  * Module dependencies.
  */
-var express    = require('express');
-var Check      = require('../../models/check');
-var CheckEvent = require('../../models/checkEvent');
-
-var app = module.exports = express();
-
-var debugErrorHandler = function() {
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-}
+var express  = require('express'),
+Check        = require('../../models/check'),
+CheckEvent   = require('../../models/checkEvent'),
+errorHandler = require('express-error-handler'),
+app = module.exports = express();
 
 // middleware
 // app.configure(function(){
@@ -18,11 +14,11 @@ var debugErrorHandler = function() {
 // app.use(app.router);
 
 if (app.get('env') === 'development' || app.get('env') === 'test') {
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
 }
 
 if (app.get('env') === 'production') {
-  app.use(express.errorHandler());
+  app.use(errorHandler());
 }
 
 // up count

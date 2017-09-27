@@ -6,6 +6,7 @@ var async = require('async');
 var partials = require('express-partials');
 var flash = require('connect-flash');
 var moment = require('moment');
+var errorHandler = require('express-error-handler')
 
 var Check = require('../../models/check');
 var Tag = require('../../models/tag');
@@ -45,16 +46,14 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 if (app.get('env') === 'development' || app.get('env') === 'test') {
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
 }
 
 if (app.get('env') === 'production') {
-  app.use(express.errorHandler());
+  app.use(errorHandler());
 }
 
-app.locals({
-  version: moduleInfo.version
-});
+app.locals.version = moduleInfo.version
 
 // Routes
 

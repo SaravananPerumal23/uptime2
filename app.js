@@ -15,6 +15,11 @@ var Ping       = require('./models/ping');
 var PollerCollection = require('./lib/pollers/pollerCollection');
 var apiApp     = require('./app/api/app');
 var dashboardApp = require('./app/dashboard/app');
+var bodyParser = require('body-parser'),
+errorHandler = require('express-error-handler'),
+methodOverride = require('method-override'),
+cookieParser = require('cookie-parser'),
+cookieSession = require('cookie-session');
 
 // database
 
@@ -36,10 +41,10 @@ var server = http.createServer(app);
 
 // the following middlewares are only necessary for the mounted 'dashboard' app,
 // but express needs it on the parent app (?) and it therefore pollutes the api
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(express.cookieParser('Z5V45V6B5U56B7J5N67J5VTH345GC4G5V4'));
-app.use(express.cookieSession({
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(cookieParser('Z5V45V6B5U56B7J5N67J5VTH345GC4G5V4'));
+app.use(cookieSession({
   key:    'uptime',
   secret: 'FZ5HEE5YHD3E566756234C45BY4DSFZ4',
   proxy:  true,
@@ -64,17 +69,17 @@ config.plugins.forEach(function(pluginName) {
 
 app.emit('beforeFirstRoute', app, apiApp);
 
-app.configure('development', function() {
+if (app.get('env') === 'development' || app.get('env') === 'test') {
   if (config.verbose) mongoose.set('debug', true);
   app.use(express.static(__dirname + '/public'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+}
 
-app.configure('production', function() {
+if (app.get('env') === 'production') {
   var oneYear = 31557600000;
   app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
   app.use(express.errorHandler());
-});
+}
 
 // Routes
 app.emit('beforeApiRoutes', app, apiApp);
