@@ -32,7 +32,8 @@ var server = http.createServer(app);
 //
 // });
 
-app.use(app.router);
+// app.use(app.router);
+
 // the following middlewares are only necessary for the mounted 'dashboard' app,
 // but express needs it on the parent app (?) and it therefore pollutes the api
 app.use(express.bodyParser());

@@ -15,7 +15,7 @@ var debugErrorHandler = function() {
 // app.configure(function(){
 //
 // });
-app.use(app.router);
+// app.use(app.router);
 
 if (app.get('env') === 'development' || app.get('env') === 'test') {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));

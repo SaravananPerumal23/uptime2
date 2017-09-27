@@ -39,7 +39,7 @@ app.use(function locals(req, res, next) {
   res.locals.moment = moment;
   next();
 });
-app.use(app.router);
+// app.use(app.router);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
