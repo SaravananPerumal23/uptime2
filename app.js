@@ -28,21 +28,23 @@ a.start();
 var app = module.exports = express();
 var server = http.createServer(app);
 
-app.configure(function(){
-  app.use(app.router);
-  // the following middlewares are only necessary for the mounted 'dashboard' app, 
-  // but express needs it on the parent app (?) and it therefore pollutes the api
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('Z5V45V6B5U56B7J5N67J5VTH345GC4G5V4'));
-  app.use(express.cookieSession({
-    key:    'uptime',
-    secret: 'FZ5HEE5YHD3E566756234C45BY4DSFZ4',
-    proxy:  true,
-    cookie: { maxAge: 60 * 60 * 1000 }
-  }));
-  app.set('pollerCollection', new PollerCollection());
-});
+// app.configure(function(){
+//
+// });
+
+app.use(app.router);
+// the following middlewares are only necessary for the mounted 'dashboard' app,
+// but express needs it on the parent app (?) and it therefore pollutes the api
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.cookieParser('Z5V45V6B5U56B7J5N67J5VTH345GC4G5V4'));
+app.use(express.cookieSession({
+  key:    'uptime',
+  secret: 'FZ5HEE5YHD3E566756234C45BY4DSFZ4',
+  proxy:  true,
+  cookie: { maxAge: 60 * 60 * 1000 }
+}));
+app.set('pollerCollection', new PollerCollection());
 
 // load plugins (may add their own routes and middlewares)
 config.plugins.forEach(function(pluginName) {
