@@ -30,7 +30,7 @@
  *     password: S3cR3t
  */
 var express = require('express'),
-basicAuth = require('basic-auth');
+basicAuth = require('express-basic-auth');
 
 exports.initWebApp = function(options) {
   var config = options.config.basicAuth;
