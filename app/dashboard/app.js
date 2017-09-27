@@ -18,37 +18,39 @@ var app = module.exports = express();
 
 // middleware
 
-app.configure(function(){
-  app.use(partials());
-  app.use(flash());
-  app.use(function locals(req, res, next) {
-    res.locals.route = app.route;
-    res.locals.addedCss = [];
-    res.locals.renderCssTags = function (all) {
-      if (all != undefined) {
-        return all.map(function(css) {
-          return '<link rel="stylesheet" href="' + app.route + '/stylesheets/' + css + '">';
-        }).join('\n ');
-      } else {
-        return '';
-      }
-    };
-    res.locals.moment = moment;
-    next();
-  });
-  app.use(app.router);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.static(__dirname + '/public'));
-});
+// app.configure(function(){
+//
+// });
 
-app.configure('development', function(){
+app.use(partials());
+app.use(flash());
+app.use(function locals(req, res, next) {
+  res.locals.route = app.route;
+  res.locals.addedCss = [];
+  res.locals.renderCssTags = function (all) {
+    if (all != undefined) {
+      return all.map(function(css) {
+        return '<link rel="stylesheet" href="' + app.route + '/stylesheets/' + css + '">';
+      }).join('\n ');
+    } else {
+      return '';
+    }
+  };
+  res.locals.moment = moment;
+  next();
+});
+app.use(app.router);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+
+if (app.get('env') === 'development' || app.get('env') === 'test') {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+}
 
-app.configure('production', function(){
+if (app.get('env') === 'production') {
   app.use(express.errorHandler());
-});
+}
 
 app.locals({
   version: moduleInfo.version

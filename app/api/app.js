@@ -12,18 +12,18 @@ var debugErrorHandler = function() {
 }
 
 // middleware
-app.configure(function(){
-  app.use(app.router);
-});
+// app.configure(function(){
+//
+// });
+app.use(app.router);
 
-app.configure('development', debugErrorHandler);
+if (app.get('env') === 'development' || app.get('env') === 'test') {
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+}
 
-app.configure('test', debugErrorHandler);
-
-app.configure('production', function(){
+if (app.get('env') === 'production') {
   app.use(express.errorHandler());
-});
-
+}
 
 // up count
 var upCount;
