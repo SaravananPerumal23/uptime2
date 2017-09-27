@@ -5,7 +5,7 @@
  *
  * Installation
  * ------------
- * This plugin is disabled by default. To enable it, add its entry 
+ * This plugin is disabled by default. To enable it, add its entry
  * to the `plugins` key of the configuration:
  *
  *   // in config/production.yaml
@@ -14,9 +14,9 @@
  *
  * Usage
  * -----
- * Restart the application, and both the API and the Dashboard applications 
+ * Restart the application, and both the API and the Dashboard applications
  * become protected. The monitor correctly authenticates its own calls to the API.
- * 
+ *
  * Default credentials are admin:password.
  *
  * Configuration
@@ -29,12 +29,13 @@
  *     username: JohnDoe
  *     password: S3cR3t
  */
-var express = require('express');
+var express = require('express'),
+basicAuth = require('basic-auth');
 
 exports.initWebApp = function(options) {
   var config = options.config.basicAuth;
   options.app.on('beforeFirstRoute', function(app, dashboardApp) {
-    app.use(express.basicAuth(config.username, config.password));
+    app.use(basicAuth(config.username, config.password));
   });
 };
 
