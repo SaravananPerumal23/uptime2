@@ -51,7 +51,7 @@
  */
 var fs         = require('fs');
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
+// var smtpTransport = require('nodemailer-smtp-transport');
 var moment     = require('moment');
 var CheckEvent = require('../../models/checkEvent');
 var ejs        = require('ejs');
@@ -59,11 +59,7 @@ var ejs        = require('ejs');
 exports.initWebApp = function(options) {
   var config = options.config.email;
   //var mailer = nodemailer.createTransport(config.method, config.transport);
-
-  var mailer = nodemailer.createTransport(smtpTransport({
-    host: config.host,
-    port: config.port
-  }));
+  var mailer = nodemailer.createTransport(config.transport);
 
   var templateDir = __dirname + '/views/';
   CheckEvent.on('afterInsert', function(checkEvent) {
