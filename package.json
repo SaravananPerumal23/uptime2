@@ -21,7 +21,7 @@
     "async":     "0.1.22",
     "socket.io": "0.9.14",
     "semver":    "1.1.0",
-    "moment":    "2.1.0",
+    "moment":    "2.29.1",
     "nodemailer": "^4.0.1",
     "net-ping":  "1.1.7",
     "js-yaml": "2.1.0",
