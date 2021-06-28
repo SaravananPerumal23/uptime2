@@ -22,7 +22,7 @@
     "socket.io": "0.9.14",
     "semver":    "1.1.0",
     "moment":    "2.1.0",
-    "nodemailer": "^4.0.1",
+    "nodemailer": "^6.6.1",
     "net-ping":  "1.1.7",
     "js-yaml": "2.1.0",
     "graceful-fs": "^4.0.0",
