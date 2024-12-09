@@ -4,9 +4,9 @@
   "version": "3.2.0",
   "author": "Francois Zaninotto",
   "dependencies": {
-    "mongoose":  "4.11.11",
+    "mongoose":  "8.8.3",
     "mongoose-lifecycle": "1.0.0",
-    "express":   "4.15.4",
+    "express":   "4.21.2",
     "express-partials": "0.3.0",
     "express-error-handler": "^0.1.4",
     "body-parser": "1.18.2",
